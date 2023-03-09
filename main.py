@@ -1,17 +1,3 @@
-# from bs4 import BeautifulSoup
-# from selenium import webdriver
-#
-# driver = webdriver.Chrome()
-# #driver.get('https://www.airfleets.net/recherche/?key=B737')
-# driver.get('https://www.helloworld.rs/oglasi-za-posao/?scope=full&q=python')
-# print(driver.page_source)
-# # soup = BeautifulSoup(html_text,  "html.parser")
-# # plane_rows = soup.find_all('tr', class_='tabcontent')
-# # print(plane_rows)
-#
-#
-
-
 # import pandas as pd
 # from geopy.geocoders import Nominatim
 #
@@ -97,14 +83,7 @@ def check_for_intersection(city_lat, city_lng, radius, orgin_airport_lat, orgin_
 
 
 
-cnt = 0
 df1 = pd.read_csv('USAterrorismdb_0616dist.csv', encoding="ISO-8859-1")
-for index, row in df1.iterrows():
-    # Print the values of the current row
-    print(row)
-    cnt= cnt +1
-
-print(cnt)
 intersect_array = []
 city_inter_array = []
 df2 = pd.read_csv('merged_file.csv')
@@ -113,8 +92,9 @@ for index, row in df2.iterrows():
         flight_date = datetime.datetime(row['YEAR'], row['MONTH'], row['DAY'])
         attack_date = datetime.datetime(row1['iyear'], row1['imonth'], row1['iday'])
         attack_date_end = attack_date + datetime.timedelta(days=10)
+        attack_date_start = attack_date - datetime.timedelta(days=10)
         intersects = check_for_intersection(row1['latitude'], row1['longitude'], 100, row['ORIGIN_LATITUDE'], row['ORIGIN_LONGITUDE'], row['DESTINATION_LATITUDE'], row['DESTINATION_LONGITUDE'])
-        if intersects and attack_date < flight_date < attack_date_end:
+        if intersects and attack_date_start < flight_date < attack_date_end:
             intersect_array.append(1)
             city_inter_array.append(row1['city'])
             break
