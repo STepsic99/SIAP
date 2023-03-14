@@ -10,7 +10,7 @@ import math
 import datetime
 from shapely.ops import split
 
-# # read the two csv files into dataframes
+# read the two csv files into dataframes
 # df1 = pd.read_csv('flightsFull.csv')
 # df2 = pd.read_csv('orgin_airports.csv')
 # df3 = pd.read_csv('destination_airports.csv')
