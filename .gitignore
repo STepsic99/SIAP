@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+flightsFull.csv
+trimmed_merged_file_scrapped.csv
+trimmed_merged_file_scrapped_cleaned.csv
+trimmed_merged_file_scrapped_cleaned_no_2.csv
+trimmed_merged_file_weather.csv
+
