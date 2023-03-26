@@ -41,20 +41,37 @@ from shapely.ops import split
 # merged_df.to_csv('final_merged_file.csv', index=False)
 #######################################################corelation
 
-df = pd.read_csv('final_merged_file.csv')
-# types_array = df.dtypes
-# for col in df.columns:
-#     if types_array[col] == 'object':
-#         df[col]=df[col].astype('category').cat.codes
-#     corr=df[col].corr(df['DEPARTURE_DELAY'])
-#     print(str(corr) + " " + col)
+df = pd.read_csv('final_merged_file_categorized.csv')
+types_array = df.dtypes
+hash_map = {}
+cnt1 = 0
+for col in df.columns:
+    if types_array[col] == 'object':
+        df[col]=df[col].astype('category').cat.codes
+    corr=df[col].corr(df['ARRIVAL_DELAY'])
+    hash_map[col] = abs(corr)
+#    print(str(corr) + " " + col)
 
-##################################################
+##################################################HashMap
 
-import numpy as n
-import matplotlib. pyplot as pt
-var1 = pd. Series (df['DEPARTURE_DELAY'])
-var2 = pd. Series (df['SCHEDULED_ARRIVAL'])
-pt. scatter (var1, var2)
-pt. plot (n. unique (var1), n. poly1d (n. polyfit (var1, var2, 1))(n. unique (var1)), color = 'green')
-pt. show()
+sorted_hash_map = sorted(hash_map.items(), key=lambda x: x[1])
+
+for x in sorted_hash_map:
+    print(x)
+print(sorted_hash_map)
+
+
+
+
+
+
+
+########################################################
+
+# import numpy as n
+# import matplotlib. pyplot as pt
+# var1 = pd. Series (df['DELAY_CATEGORY'])
+# var2 = pd. Series (df['ORIGIN_WCODE'])
+# pt. scatter (var1, var2)
+# pt. plot (n. unique (var1), n. poly1d (n. polyfit (var1, var2, 1))(n. unique (var1)), color = 'green')
+# pt. show()
