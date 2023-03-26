@@ -41,14 +41,14 @@ from shapely.ops import split
 # merged_df.to_csv('final_merged_file.csv', index=False)
 #######################################################corelation
 
-df = pd.read_csv('final_merged_file_categorized.csv')
+df = pd.read_csv('final_merged_file_categorized_outliers.csv')
 types_array = df.dtypes
 hash_map = {}
 cnt1 = 0
 for col in df.columns:
     if types_array[col] == 'object':
         df[col]=df[col].astype('category').cat.codes
-    corr=df[col].corr(df['ARRIVAL_DELAY'])
+    corr=df[col].corr(df['ARRIVAL_DELAY_CATEGORY'])
     hash_map[col] = abs(corr)
 #    print(str(corr) + " " + col)
 
